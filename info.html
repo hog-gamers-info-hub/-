@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HOG Gamers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <h1>HOG GAMERS</h1>
+    <p class="tagline">Official Tournament Information Hub</p>
+</div>
+
+<!-- HOME -->
+<div class="container" id="homeView">
+    <div class="menu">
+
+        <a href="#about" class="menu-item">
+            About Us
+            <div class="popup">Learn about our organisation and tournament structure.</div>
+        </a>
+
+        <a href="#rules" class="menu-item">
+            Tournament Rules
+            <div class="popup">View detailed rules for all tournament modes.</div>
+        </a>
+
+        <a href="#benefits" class="menu-item">
+            Benefits
+            <div class="popup">Explore paid scrims, matches and tournaments.</div>
+        </a>
+
+        <a href="#suggestions" class="menu-item">
+            Suggestions
+            <div class="popup">Share feedback to improve our tournaments.</div>
+        </a>
+
+        <a href="#social" class="menu-item">
+            Social Media Links
+            <div class="popup">Connect with us across platforms.</div>
+        </a>
+
+    </div>
+</div>
+
+<!-- PAGE VIEW -->
+<div class="page-view" id="pageView">
+
+    <div class="page-header">
+        <button id="backBtn" class="back-btn" onclick="history.back()">← Back</button>
+        <button id="homeBtn" class="back-btn" onclick="location.hash='#home'">Home</button>
+        <h2 id="pageTitle"></h2>
+    </div>
+
+    <div class="page-content">
+
+        <!-- ================= LEVEL 2 ================= -->
+
+        <!-- ABOUT -->
+        <div class="section-content" id="about">
+            <a href="#about-organisation"><div class="card-link">About Organisation</div></a>
+            <a href="#about-tournaments"><div class="card-link">About Tournaments</div></a>
+        </div>
+
+        <!-- RULES -->
+        <div class="section-content" id="rules">
+            <a href="#rules-solo"><div class="card-link">Full Map Solo Tournament Rules</div></a>
+            <a href="#rules-duo"><div class="card-link">Full Map Duo Tournament Rules</div></a>
+            <a href="#rules-custom"><div class="card-link">Paid Custom Matches Rules</div></a>
+        </div>
+
+        <!-- BENEFITS -->
+        <div class="section-content" id="benefits">
+            <a href="#benefits-scrims"><div class="card-link">Paid Scrims</div></a>
+            <a href="#benefits-matches"><div class="card-link">Paid Matches</div></a>
+            <a href="#benefits-tournaments"><div class="card-link">Paid Tournaments</div></a>
+        </div>
+
+        <!-- SUGGESTIONS -->
+        <div class="section-content" id="suggestions">
+            <a href="#suggestions-feedback"><div class="card-link">Give Feedback</div></a>
+            <a href="#suggestions-improvements"><div class="card-link">Suggest Improvements</div></a>
+        </div>
+
+        <!-- SOCIAL -->
+        <div class="section-content" id="social">
+            <a href="https://www.instagram.com/hog_gamers?igsh=enNjdHRweXZzZGhz" target="_blank">
+                <div class="card-link">Instagram</div>
+            </a>
+
+            <a href="https://youtube.com/@hoggamerslive?si=69ajGMolXyHYwUDw" target="_blank">
+                <div class="card-link">YouTube</div>
+            </a>
+
+            <a href="https://whatsapp.com/channel/0029VagAQHF4inot7ReHCQ1h" target="_blank">
+                <div class="card-link">WhatsApp</div>
+            </a>
+        </div>
+
+
+        <!-- ================= LEVEL 3 ================= -->
+
+        <!-- ABOUT DETAILS -->
+        <div class="section-content rule-detail" id="about-organisation">
+            <p>HOG Gamers is a structured esports organisation.</p>
+            <hr>
+            <p>We focus on competitive integrity and fairness.</p>
+        </div>
+
+        <div class="section-content rule-detail" id="about-tournaments">
+            <p>We conduct full map tournaments regularly.</p>
+            <hr>
+            <p>Different modes are available for all player types.</p>
+        </div>
+
+        <!-- RULE DETAILS -->
+        <div class="section-content rule-detail" id="rules-solo">
+            <p>No teaming allowed.</p>
+            <hr>
+            <p>No hacks or unfair gameplay.</p>
+            <hr>
+            <p>Follow host instructions strictly.</p>
+        </div>
+
+        <div class="section-content rule-detail" id="rules-duo">
+            <p>Only registered duo allowed.</p>
+            <hr>
+            <p>Both players must join on time.</p>
+            <hr>
+            <p>Violation leads to disqualification.</p>
+        </div>
+
+        <div class="section-content rule-detail" id="rules-custom">
+            <p>Entry confirmation required.</p>
+            <hr>
+            <p>No refund after room code release.</p>
+            <hr>
+            <p>Fair play mandatory.</p>
+        </div>
+
+        <!-- BENEFITS DETAILS -->
+        <div class="section-content rule-detail" id="benefits-scrims">
+            <p>Daily competitive scrims for teams.</p>
+            <hr>
+            <p>Performance-based rankings.</p>
+        </div>
+
+        <div class="section-content rule-detail" id="benefits-matches">
+            <p>Organised custom paid matches.</p>
+            <hr>
+            <p>Verified room distribution.</p>
+        </div>
+
+        <div class="section-content rule-detail" id="benefits-tournaments">
+            <p>Regular prize pool tournaments.</p>
+            <hr>
+            <p>Transparent result verification.</p>
+        </div>
+
+        <!-- SUGGESTION DETAILS -->
+        <div class="section-content rule-detail" id="suggestions-feedback">
+            <p>Players can send structured feedback.</p>
+            <hr>
+            <p>Feedback helps improve tournament quality.</p>
+        </div>
+
+        <div class="section-content rule-detail" id="suggestions-improvements">
+            <p>Suggest new formats or rule changes.</p>
+            <hr>
+            <p>Community driven improvements.</p>
+        </div>
+    </div>
+</div>
+
+<footer class="footer" id="footer">
+    © 2026 HOG Gamers. All Rights Reserved.
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
