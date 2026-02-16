@@ -1,3 +1,6 @@
+let lastHash = null;
+let isTransitioning = false;
+
 window.addEventListener("hashchange", router);
 window.addEventListener("load", () => {
     if (!window.location.hash) {
@@ -7,9 +10,93 @@ window.addEventListener("load", () => {
 });
 
 function router() {
+    if (isTransitioning) return;
 
-    const hash = window.location.hash.substring(1);
+    const newHash = window.location.hash.substring(1) || "home";
 
+    // Initial load – update directly without transition
+    if (lastHash === null) {
+        updateContent(newHash);
+        lastHash = newHash;
+        return;
+    }
+
+    // Same hash – ignore
+    if (lastHash === newHash) return;
+
+    isTransitioning = true;
+    performTransition(newHash);
+}
+
+function performTransition(newHash) {
+    const oldHash = lastHash;
+    const oldIsHome = (oldHash === "home");
+    const newIsHome = (newHash === "home");
+
+    const homeView = document.getElementById("homeView");
+    const pageView = document.getElementById("pageView");
+    const footer = document.getElementById("footer");
+
+    if (oldIsHome !== newIsHome) {
+        // Switching between home and pageView
+        const oldContainer = oldIsHome ? homeView : pageView;
+        const newContainer = newIsHome ? homeView : pageView;
+
+        // Fade out old container
+        oldContainer.classList.add('fade-out');
+
+        setTimeout(() => {
+            // Update content (this will set display: none/block appropriately)
+            updateContent(newHash);
+
+            // Ensure old container is hidden and remove fade class
+            oldContainer.classList.remove('fade-out');
+
+            // Prepare new container for fade in
+            newContainer.style.opacity = 0;
+            // Force reflow to apply opacity before adding class
+            void newContainer.offsetHeight;
+            newContainer.classList.add('fade-in');
+
+            setTimeout(() => {
+                newContainer.classList.remove('fade-in');
+                newContainer.style.opacity = '';
+                isTransitioning = false;
+            }, 300); // match CSS transition duration
+        }, 300);
+    } else {
+        // Both are pageView sections
+        const oldSection = document.getElementById(oldHash);
+        const newSection = document.getElementById(newHash);
+
+        if (oldSection && newSection) {
+            oldSection.classList.add('fade-out');
+
+            setTimeout(() => {
+                updateContent(newHash);
+                oldSection.classList.remove('fade-out');
+
+                newSection.style.opacity = 0;
+                void newSection.offsetHeight;
+                newSection.classList.add('fade-in');
+
+                setTimeout(() => {
+                    newSection.classList.remove('fade-in');
+                    newSection.style.opacity = '';
+                    isTransitioning = false;
+                }, 300);
+            }, 300);
+        } else {
+            // Fallback if sections missing
+            updateContent(newHash);
+            isTransitioning = false;
+        }
+    }
+
+    lastHash = newHash;
+}
+
+function updateContent(hash) {
     const homeView = document.getElementById("homeView");
     const pageView = document.getElementById("pageView");
     const footer = document.getElementById("footer");
@@ -59,10 +146,8 @@ function router() {
         activeSection.dataset.parent !== "home" ? "inline-block" : "none";
 }
 
-
 // Controlled Back Navigation
 document.getElementById("backBtn").onclick = function () {
-
     const hash = window.location.hash.substring(1);
     if (hash === "home") return;
 
@@ -75,7 +160,6 @@ document.getElementById("backBtn").onclick = function () {
 
     window.location.hash = "#" + current.dataset.parent;
 };
-
 
 function copyLink() {
     navigator.clipboard.writeText(window.location.href).then(() => {
