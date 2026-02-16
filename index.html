@@ -1,455 +1,1116 @@
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HOG Gamers Info Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-:root {
-    --bg-dark: #0a0c10;
-    --card-dark: #14161f;
-    --primary: #00bfff;
-    --primary-glow: rgba(0, 191, 255, 0.4);
-    --text-light: #ffffff;
-    --text-muted: #9aa0b0;
-    --gradient-1: linear-gradient(135deg, #00bfff, #0066ff);
-    --gradient-2: linear-gradient(145deg, #1e2230, #13151f);
-    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
-    --shadow-glow: 0 0 20px var(--primary-glow);
-    --border-glow: 0 0 0 1px rgba(0, 191, 255, 0.2);
-    --border-light: 1px solid rgba(255, 255, 255, 0.06);
-}
+<!-- <div class="image"><img src="logo.png" alt="Logo"></div> -->
+<!-- TOP BAR -->
+<div class="top-bar">
+    <img src="logo.png" alt="Logo">
+    <h1>HOG GAMERS</h1>
+    <div id="breadcrumbTop" class="breadcrumb-top">
+        Official Tournament Information Hub
+    </div>
+</div>
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-}
+<!-- HOME -->
+<div class="container" id="homeView">
+    <div class="menu">
+        <a href="#about" class="menu-item">
+            About Us
+            <span class="info-icon" data-popup="Learn about our organisation and tournament structure.">ⓘ</span>
+        </a>
+        <a href="#rules" class="menu-item">
+            Tournament Rules
+            <span class="info-icon" data-popup="View detailed rules for all tournament modes.">ⓘ</span>
+        </a>
+        <a href="#benefits" class="menu-item">
+            Benefits
+            <span class="info-icon" data-popup="Explore paid scrims and tournaments.">ⓘ</span>
+        </a>
+        <a href="#suggestions" class="menu-item">
+            Suggestions
+            <span class="info-icon" data-popup="Share feedback to improve tournaments.">ⓘ</span>
+        </a>
+        <!-- NEW: Payment Proofs -->
+        <a href="#payment-proofs" class="menu-item">
+            Payment Proofs
+            <span class="info-icon" data-popup="View payment proofs for various events.">ⓘ</span>
+        </a>
+        <a href="#social" class="menu-item">
+            Social Media Links
+            <span class="info-icon" data-popup="Connect with us across platforms.">ⓘ</span>
+        </a>
+    </div>
+</div>
 
-body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    color: var(--text-light);
-    line-height: 1.5;
-    background: var(--bg-dark);
-    /* Subtle animated gradient background covering entire body */
-    background-image: radial-gradient(circle at 30% 40%, rgba(0, 191, 255, 0.2) 0%, transparent 40%),
-                      radial-gradient(circle at 70% 60%, rgba(0, 191, 255, 0.15) 0%, transparent 50%),
-                      radial-gradient(circle at 40% 80%, rgba(0, 100, 255, 0.10) 0%, transparent 60%);
-    background-size: 200% 200%;
-    animation: subtleBackgroundShift 25s ease-in-out infinite;
-    position: relative;
-}
+<!-- PAGE VIEW -->
+<div class="page-view" id="pageView">
+    <div class="page-header">
+        <div class="header-actions">
+            <button id="backBtn" class="back-btn">Back</button>
+            <button id="homeBtn" class="back-btn" onclick="location.hash='#home'">Home</button>
+            <button id="copyBtn" class="back-btn" onclick="copyLink()">Copy Link</button>
+        </div>
+        <h2 id="pageTitle"></h2>
+    </div>
 
-@keyframes subtleBackgroundShift {
-    0% { background-position: 0% 0%; }
-    33% { background-position: 100% 50%; }
-    66% { background-position: 50% 100%; }
-    100% { background-position: 0% 0%; }
-}
+    <div class="page-content">
+        <!-- LEVEL 2 SECTIONS -->
+        <div class="section-content"
+             id="about"
+             data-title="About Us"
+             data-parent="home">
+            <a href="#about-organisation"><div class="card-link">About Organisation</div></a>
+            <a href="#about-tournaments"><div class="card-link">About Tournaments</div></a>
+        </div>
 
-/* TOP BAR with gradient – compact */
-.top-bar {
-    width: 100%;
-    background: var(--gradient-2);
-    padding: 15px 20px;
-    text-align: center;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    box-shadow: var(--shadow-sm);
-    position: relative;
-    overflow: hidden;
-}
+        <div class="section-content"
+             id="rules"
+             data-title="Tournament Rules"
+             data-parent="home">
+            <a href="#rules-solo"><div class="card-link">Full Map Solo Rules</div></a>
+            <a href="#rules-duo"><div class="card-link">Full Map Duo Rules</div></a>
+            <a href="#rules-squad"><div class="card-link">Full Map Squad Rules</div></a>
+            <a href="#rules-custom"><div class="card-link">Paid Custom Match Rules</div></a>
+            <!-- NEW: Clash Squad Rules -->
+            <a href="#rules-clashsquad"><div class="card-link">Clash Squad Rules</div></a>
+        </div>
 
-.top-bar::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at center, rgba(0,191,255,0.1) 0%, transparent 70%);
-    animation: rotate 20s linear infinite;
-    z-index: 0;
-}
+        <div class="section-content"
+             id="benefits"
+             data-title="Benefits"
+             data-parent="home">
+            <a href="#benefits-scrims"><div class="card-link">Paid Scrims</div></a>
+            <a href="#benefits-matches"><div class="card-link">Paid Matches</div></a>
+            <a href="#benefits-tournaments"><div class="card-link">Paid Tournaments</div></a>
+        </div>
 
-.top-bar h1 {
-    font-size: clamp(28px, 7vw, 52px);
-    letter-spacing: 4px;
-    font-weight: 700;
-    background: var(--gradient-1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    position: relative;
-    z-index: 1;
-    text-shadow: 0 2px 10px rgba(0,191,255,0.3);
-    line-height: 1.2;
-    margin: 0;
-}
+        <div class="section-content"
+             id="suggestions"
+             data-title="Suggestions"
+             data-parent="home">
+            <a href="#suggestions-feedback"><div class="card-link">Give Feedback</div></a>
+            <a href="#suggestions-improvements"><div class="card-link">Suggest Improvements</div></a>
+        </div>
 
-.breadcrumb-top {
-    font-size: clamp(12px, 3vw, 15px);
-    color: var(--text-muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    position: relative;
-    z-index: 1;
-    margin-top: 5px;
-}
+        <!-- NEW: Payment Proofs Level 2 -->
+        <div class="section-content"
+             id="payment-proofs"
+             data-title="Payment Proofs"
+             data-parent="home">
+            <a href="#payment-collab"><div class="card-link">Collaborative Tournament Payments</div></a>
+            <a href="#payment-official"><div class="card-link">Official HOG Tournament Payments</div></a>
+            <a href="#payment-sponsored"><div class="card-link">HOG Sponsored Event Payments</div></a>
+        </div>
 
-/* HOME CONTAINER */
-.container {
-    width: 100%;
-    max-width: 560px;
-    margin: 50px auto;
-    padding: 0 25px;
-    flex: 1;
-}
+        <div class="section-content"
+             id="social"
+             data-title="Social Media Links"
+             data-parent="home">
+            <!-- Existing external links -->
+            <a href="https://www.instagram.com/hog_gamers" target="_blank">
+                <div class="card-link">Instagram Acount</div>
+            </a>
+            <a href="https://youtube.com/@hoggamerslive" target="_blank">
+                <div class="card-link">YouTube channel</div>
+            </a>
+            <a href="https://whatsapp.com/channel/0029VagAQHF4inot7ReHCQ1h" target="_blank">
+                <div class="card-link">Official WhatsApp Channel</div>
+            </a>
+            <!-- NEW internal subcategories (Level 3) -->
+            <a href="#social-ffstatus"><div class="card-link">FF Status WhatsApp Channel</div></a>
+            <a href="#social-buysell"><div class="card-link">FF ID Buy & Sell Channel</div></a>
+        </div>
 
-/* MENU ITEMS - Glassmorphism style */
-.menu {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+        <!-- ========== LEVEL 3 SECTIONS ========== -->
 
-.menu-item {
-    background: rgba(20, 22, 31, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 22px 20px;
-    border-radius: 18px;
-    text-decoration: none;
-    color: var(--text-light);
-    transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
-    border: var(--border-light);
-    font-size: clamp(16px, 2.5vw, 20px);
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: var(--shadow-sm);
-    position: relative;
-    /* overflow: hidden;  <-- REMOVED to allow popup to be visible */
-}
+        <!-- About Us > About Organisation -->
+        <div class="section-content"
+             id="about-organisation"
+             data-title="About Organisation"
+             data-parent="about">
+            <p><storing>Hog Gamers</storing> was established in January 2023 with a long-term vision of building a powerful and trusted esports brand in India. From the beginning, our focus has never been just on organizing matches — our focus has always been on creating a competitive ecosystem where players are respected, supported, and rewarded fairly.</p><br>
+            <p>We understand that many players struggle to find tournaments that are transparent, affordable, and genuinely player-oriented. That is exactly the gap Hog Gamers was created to fill.</p><br>
+            <p><strong>Our foundation stands on five strong pillars:</strong></p>
 
-.menu-item::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--gradient-1);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 0;
-    pointer-events: none;
-}
+            <p>&bull; <strong>Prize Guarantee</strong> – Every committed reward is honored.</p>
+            <p>&bull; <strong>Low Entry Fees</strong> – Competitive gaming should be accessible.</p>
+            <p>&bull; <strong>Low Margin Policy</strong> – Players’ growth is prioritized over excessive profit.</p>
+            <p>&bull; <strong>Complete Transparency</strong> – Clear rules, clear results, clear communication.</p>
+            <p>&bull; <strong>Professional & Polite Management</strong> – Respect for every player and team.</p><br>
 
-.menu-item:hover {
-    transform: translateY(-5px) scale(1.02);
-    border-color: var(--primary);
-    box-shadow: var(--shadow-md), var(--border-glow);
-}
+            <p>We are a Pan-India esports community aiming to nurture talent, promote fair competition, and gradually build a long-term esports brand that players can trust without hesitation.</p><br>
+            <p>Hog Gamers is not just organizing tournaments — we are building a competitive culture.</p><br><hr>
+        </div>
 
-.menu-item:hover::after {
-    opacity: 0.1;
-}
+        <!-- About Us > About Tournaments -->
+        <div class="section-content"
+             id="about-tournaments"
+             data-title="About Tournaments"
+             data-parent="about">
+             <p>Hog Gamers currently organizes competitive tournaments for Free Fire Max, with structured plans to expand into major esports titles such as BGMI, Indus, and Valorant in the upcoming phases.</p><br>
+             <p>We offer multiple competitive formats including:</p>
+             <p>&bull; Full Map Solo</p>
+            <p>&bull; Full Map Solo</p>
+            <p>&bull; Full Map Duo</p>
+            <p>&bull; Full Map Squad</p>
+            <p>&bull; Clash Squad</p>
+            <p>&bull; Paid Custom Matches</p>
+            <p>&bull; Special Event & Invitational Tournaments</p><br>
+            <p>Our tournament roadmap includes daily, weekly, and seasonal events. While we are in our early growth stage, the long-term structure is designed to provide continuous competition opportunities throughout the year.</p><br>
+            <p>Prize pools vary depending on tournament type and mode. We conduct both entry-based and special reward tournaments, with payout systems including direct cash rewards, UPI transfers, and structured prize distributions.</p><br>
+            <p>Qualification structures differ based on the mode and tournament design to ensure competitive balance and fair opportunities for all participants.</p><br>
+            <p>Every tournament conducted under Hog Gamers is built on clarity, discipline, fair play, and structured coordination.</p><br><hr>
 
-.menu-item span {
-    position: relative;
-    z-index: 1;
-}
+        </div>
 
-/* INFO ICON – perfectly centered */
-.info-icon {
-    cursor: pointer;
-    font-size: 1.6rem;
-    margin-left: 12px;
-    user-select: none;
-    transition: all 0.2s ease;
-    background: rgba(255,255,255,0.05);
-    width: 36px;
-    height: 36px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    position: relative;
-    z-index: 2;
-    line-height: 1; /* ensures vertical alignment */
-}
+        <!-- Tournament Rules > Full Map Solo Rules -->
+        <div class="section-content rule-detail"
+             id="rules-solo"
+             data-title="Full Map Solo Rules"
+             data-parent="rules">
+            <h3>IMPORTANT</h3>
+            <p>&bull; Organisation Team has full authority to take final decisions.</p>
+            <p>&bull; Organisation can modify/change rules if required for fairness.</p><hr>
 
-.info-icon > * {
-    display: inline-block;
-    line-height: 1;
-    vertical-align: middle;
-}
+            <h3>GENERAL RULES</h3>
+            <p><strong>1.1 Authority</strong></p>
+            <p>&bull; Tournament organiser decisions are final.</p>
+            <p>&bull; Rules may be modified if required for fairness.</p><hr>
 
-.info-icon:hover {
-    transform: scale(1.15);
-    background: rgba(0,191,255,0.15);
-    border-color: var(--primary);
-    box-shadow: 0 0 15px var(--primary-glow);
-}
+            <p><strong>1.2 Competitive Integrity</strong></p>
+            <p>&bull; Always play to win.</p>
+            <p>&bull; No collusion with other teams.</p>
+            <p>&bull; No intentional losing.</p>
+            <p>&bull; No prize splitting agreements.</p><hr>
 
-.info-icon.active {
-    color: var(--primary);
-    background: rgba(0,191,255,0.2);
-    border-color: var(--primary);
-    box-shadow: 0 0 20px var(--primary-glow);
-    transform: scale(1.2);
-}
+            <p><strong>1.3 Fair Play</strong></p>
+            <p>&bull; No hacks, modded APK, scripts, macros.</p>
+            <p>&bull; No bug abuse.</p>
+            <p>&bull; No external assistance or signals.</p>
 
-/* POPUP */
-.popup {
-    position: absolute;
-    bottom: 130%;
-    right: 0;
-    background: #1e2230;
-    padding: 14px 18px;
-    border-radius: 14px;
-    font-size: 13px;
-    width: 240px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s ease, bottom 0.25s ease, transform 0.2s;
-    border: var(--border-light);
-    box-shadow: var(--shadow-md), 0 0 0 1px rgba(0,191,255,0.2);
-    backdrop-filter: blur(5px);
-    color: #e0e4f0;
-    line-height: 1.5;
-    z-index: 102;
-    white-space: normal;
-    word-wrap: break-word;
-    transform: translateY(5px);
-}
+            <p>Violation = disqualification + possible ban.</p><hr>
 
-.popup.show {
-    opacity: 1;
-    pointer-events: auto;
-    bottom: 120%;
-    transform: translateY(0);
-}
+            <h3>ELIGIBILITY</h3>
+            <p>&bull; Players must have minimum Level 40 to join.</p>
+            <p>&bull; Players must be registered before match to play and claim rewards.</p>
+            <p>&bull; Only mobile players are allowed.</p>
+            <p>&bull; Each player can participate with only one account.</p>
+            <p>&bull; No account sharing or smurfing allowed.</p><hr>
 
-/* PAGE VIEW */
-.page-view {
-    display: none;
-    max-width: 750px;
-    margin: 50px auto;
-    padding: 0 25px;
-    animation: fadeInUp 0.5s ease;
-    flex: 1;
-    width: 100%;
-}
+            <h3>MATCH FORMAT</h3>
+            <p>&bull; Mode: Battle Royale – SOLO (Full Map)</p>
+            <p>&bull; Total Players: 48</p>
+            <p>&bull; Vehicles: ❌ Not Allowed</p>
+            <p>&bull; Character Skills: ON</p>
+            <p>&bull; Gun Skin Attributes: OFF</p><hr>
 
-.page-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
-}
+            <h3>SCORING SYSTEM</h3>
+            <p>Total Points = Placement Points + Kill Points</p>
+            <p><strong>Kill Points</strong></p>
+            <p>&bull; 1 point per elimination</p>
 
-.page-header h2 {
-    font-size: clamp(22px, 5vw, 32px);
-    font-weight: 600;
-    background: var(--gradient-1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-left: auto;
-}
+            <p><strong>Placement Points</strong></p>
+            <table border="1" cellpadding="6" cellspacing="0">
+            <tr>
+                <th>Position</th>
+                <th>Points</th>
+            </tr>
+            <tr><td>1st</td><td>12</td></tr>
+            <tr><td>2nd</td><td>9</td></tr>
+            <tr><td>3rd</td><td>8</td></tr>
+            <tr><td>4th</td><td>7</td></tr>
+            <tr><td>5th</td><td>6</td></tr>
+            <tr><td>6th</td><td>5</td></tr>
+            <tr><td>7th</td><td>4</td></tr>
+            <tr><td>8th</td><td>3</td></tr>
+            <tr><td>9th</td><td>2</td></tr>
+            <tr><td>10th</td><td>1</td></tr>
+            <tr><td>11th–48th</td><td>0</td></tr>
+            </table>
 
-.header-actions {
-    display: flex;
-    gap: 10px;
-}
+            <p>&bull; Top player according to tournament will be selected.</p>
+            <p>&bull; If points are equal → higher placement decides rank.</p><hr>
 
-.back-btn {
-    background: rgba(20, 22, 31, 0.8);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(0,191,255,0.3);
-    color: var(--primary);
-    padding: 8px 16px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-weight: 500;
-    font-size: 14px;
-    box-shadow: var(--shadow-sm);
-}
+            <h3>FAIR PLAY RULES</h3>
+            <p>&bull; No teaming with other players.</p>
+            <p>&bull; No intentional letting others win.</p>
+            <p>&bull; No hacks, cheats, mod APK, scripts.</p>
+            <p>&bull; No bug abuse.</p>
+            <p>&bull; Any cheating = permanent ban.</p><hr>
 
-.back-btn:hover {
-    background: var(--primary);
-    color: #000;
-    border-color: var(--primary);
-    box-shadow: 0 0 15px var(--primary-glow);
-    transform: translateY(-2px);
-}
+            <h3>TECHNICAL RULES</h3>
+            <p>&bull; Vehicles are not allowed.</p>
+            <p>&bull; Players are responsible for their own internet issues.</p>
+            <p>&bull; No remake for personal network problems.</p>
+            <p>&bull; Reconnect allowed if match still active.</p>
+            <p>&bull; Room ID & Password will be shared 10 minutes before match time.</p><hr>
 
-/* CARD LINKS (subcategory buttons) */
-.card-link {
-    background: var(--card-dark);
-    padding: 18px 22px;
-    border-radius: 16px;
-    margin-bottom: 15px;
-    font-size: 16px;
-    font-weight: 500;
-    border: var(--border-light);
-    transition: all 0.25s ease;
-    box-shadow: var(--shadow-sm);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    overflow: hidden;
-}
+            <h3>PROOF & REPORTING</h3>
+            <p>&bull; Players must record or save gameplay (POV) if required.</p>
+            <p>&bull; If suspected cheating, report with proper evidence.</p>
+            <p>&bull; Organisers may request gameplay proof anytime.</p><hr>
 
-.card-link::after {
-    content: '→';
-    font-size: 18px;
-    opacity: 0;
-    transform: translateX(-10px);
-    transition: all 0.25s ease;
-    color: var(--primary);
-}
+            <h3>PRIZE RULES</h3>
+            <p>&bull; Winners must submit match screenshot to organiser.</p>
+            <p>&bull; Prize claim may require following official page (if applicable).</p>
+            <p>&bull; Prize pool may vary based on number of participants.</p>
+            <p>&bull; Final decision of prize distribution lies with organisers.</p><hr>
+        </div>
 
-.card-link:hover {
-    border-color: var(--primary);
-    transform: translateY(-3px) scale(1.01);
-    box-shadow: var(--shadow-md), 0 0 0 1px rgba(0,191,255,0.2);
-    background: #1a1d2a;
-}
+        <!-- Tournament Rules > Full Map Duo Rules -->
+        <div class="section-content rule-detail"
+             id="rules-duo"
+             data-title="Full Map Duo Rules"
+             data-parent="rules">
+            <h3>GENERAL RULES</h3>
+            <p><strong>1.1 Authority</strong></p>
+            <p>&bull; Tournament organiser decisions are final.</p>
+            <p>&bull; Rules may be modified if required for fairness.</p><hr>
 
-.card-link:hover::after {
-    opacity: 1;
-    transform: translateX(0);
-}
+            <p><strong>1.2 Competitive Integrity</strong></p>
+            <p>&bull; Always play to win.</p>
+            <p>&bull; No collusion with other teams.</p>
+            <p>&bull; No intentional losing.</p>
+            <p>&bull; No prize splitting agreements.</p><hr>
 
-.page-content a {
-    text-decoration: none;
-    color: var(--text-light);
-}
+            <p><strong>1.3 Fair Play</strong></p>
+            <p>&bull; No hacks, modded APK, scripts, macros.</p>
+            <p>&bull; No bug abuse.</p>
+            <p>&bull; No external assistance or signals.</p>
 
-/* RULE DETAILS */
-.rule-detail {
-    padding: 15px 0;
-}
+            <p>Violation = disqualification + possible ban.</p><hr>
 
-.rule-detail p {
-    margin: 20px 0;
-    font-size: 16px;
-    line-height: 1.7;
-    color: #d0d4e0;
-}
+            <h3>MATCH FORMAT</h3>
+            <p><strong>2.1 Mode</strong></p>
+            <p>&bull; Battle Royale – Duo (Full Map)</p>
+            <p>&bull; Objective: Last duo alive (BOOYAH)</p><hr>
 
-.rule-detail hr {
-    border: none;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    margin: 20px 0;
-}
+            <p><strong>2.2 Lobby Structure</strong></p>
+            <p>&bull; 24 teams per match</p>
+            <p>&bull; 2 players per team</p>
+            <p>&bull; Total 48 players</p><hr>
 
-/* ========== CRITICAL: SECTION HIDING/SHOWING ========== */
-.section-content {
-    display: none;
-}
+            <p><strong>2.3 Maps</strong></p>
+            <p>&bull; Bermuda</p>
+            <p>&bull; Purgatory</p>
+            <p>&bull; Kalahari</p>
+            <p>&bull; Alpine</p>
+            <p>&bull; Nexterra</p>
 
-.section-content.active-section {
-    display: block;
-}
+            <p>Map rotation decided by organiser.</p><hr>
 
-/* FOOTER */
-.footer {
-    text-align: center;
-    padding: 25px 20px;
-    font-size: 14px;
-    color: var(--text-muted);
-    border-top: 1px solid rgba(255,255,255,0.05);
-    margin-top: 60px;
-    background: rgba(10, 12, 16, 0.8);
-    backdrop-filter: blur(5px);
-    width: 100%;
-}
+            <p><strong>2.4 Match Day Structure</strong></p>
+            <p>&bull; 4–6 matches per day</p>
+            <p>&bull; Points accumulate across all matches</p>
+            <p>&bull; Overall ranking based on total points</p><hr>
 
-/* ANIMATIONS */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+            <p><strong>2.5 Disconnection</strong></p>
+            <p>&bull; Match continues if one player disconnects</p>
+            <p>&bull; Reconnect allowed if match active</p>
+            <p>&bull; No remake for personal internet issues</p>
+            <p>&bull; Only server-wide failure may qualify for remake</p><hr>
 
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
+            <h3>SCORING SYSTEM</h3>
+            <p><strong>3.1 Formula</strong></p>
+            <p>Total Points = Placement Points + Elimination Points</p><hr>
 
-/* RESPONSIVE */
-@media (max-width: 480px) {
-    .container,
-    .page-view {
-        padding: 0 20px;
-    }
-    
-    .menu-item {
-        padding: 18px 16px;
-    }
-    
-    .info-icon {
-        width: 32px;
-        height: 32px;
-        font-size: 1.4rem;
-    }
-    
-    .popup {
-        width: 200px;
-        font-size: 12px;
-        padding: 12px;
-    }
-    
-    .page-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .page-header h2 {
-        margin-left: 0;
-    }
-    
-    .header-actions {
-        width: 100%;
-        justify-content: space-between;
-    }
-}
+            <p><strong>3.2 Elimination Points</strong></p>
+            <p>&bull; 1 point per kill</p><hr>
 
-hr {
-    border: none;
-    border-top: 1px solid #ccc;  /* or any color/thickness you prefer */
-    height: 0;
-    margin: 1em 0;
-    clear: both;
-}
+            <p><strong>3.3 Placement Points (24 Teams)</strong></p>
+            <table border="1" cellpadding="6" cellspacing="0">
+            <tr>
+                <th>Placement</th>
+                <th>Points</th>
+            </tr>
+            <tr><td>1st</td><td>12</td></tr>
+            <tr><td>2nd</td><td>9</td></tr>
+            <tr><td>3rd</td><td>8</td></tr>
+            <tr><td>4th</td><td>7</td></tr>
+            <tr><td>5th</td><td>6</td></tr>
+            <tr><td>6th</td><td>5</td></tr>
+            <tr><td>7th</td><td>4</td></tr>
+            <tr><td>8th</td><td>3</td></tr>
+            <tr><td>9th</td><td>2</td></tr>
+            <tr><td>10th</td><td>1</td></tr>
+            <tr><td>11th–24th</td><td>0</td></tr>
+            </table><hr>
 
-/* .image {
-    position: absolute;
-    z-index: 104;
-    top: 10px;
-    left: 10px;
-} */
-img {
-    position: absolute;
-    height: 70px;
-    width: 70px;
-    left: 25px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-radius: 50%;
-}
+            <p><strong>3.4 Tiebreakers</strong></p>
+            <p>&bull; Most Booyahs</p>
+            <p>&bull; Most eliminations</p>
+            <p>&bull; Best placement in most recent match</p><hr>
+
+            <h3>TEAM STRUCTURE RULES</h3>
+            <p><strong>4.1 Team Size</strong></p>
+            <p>&bull; Exactly 2 active players per team</p><hr>
+
+            <p><strong>4.2 Substitution</strong></p>
+            <p>&bull; No substitution during active match</p>
+            <p>&bull; Allowed only between matches (if organiser permits)</p><hr>
+
+            <p><strong>4.3 Account Rules</strong></p>
+            <p>&bull; One account per player</p>
+            <p>&bull; No smurfing</p>
+            <p>&bull; No account sharing</p>
+            <p>&bull; No multi-team participation</p><hr>
+
+            <h3>CODE OF CONDUCT</h3>
+            <p><strong>5.1 Sportsmanship</strong></p>
+            <p>&bull; Respect opponents & officials</p>
+            <p>&bull; No toxic behavior</p><hr>
+
+            <p><strong>5.2 Language</strong></p>
+            <p>&bull; No abusive, racist, threatening language</p>
+            <p>&bull; Applies in-game & social media</p><hr>
+
+            <p><strong>5.3 Participation Commitment</strong></p>
+            <p>&bull; Teams must complete tournament</p>
+            <p>&bull; Refusing to play = penalty</p><hr>
+
+            <p><strong>5.4 Discrimination</strong></p>
+            <p>&bull; Zero tolerance policy</p><hr>
+
+            <p><strong>5.5 Technical Issue Conduct</strong></p>
+            <p>&bull; Players responsible for internet</p>
+            <p>&bull; No false technical excuses</p>
+            <p>&bull; No intentional disconnect to avoid elimination</p>
+            <p>&bull; Server-wide failure only grounds for remake</p><hr>
+
+            <h3>PENALTIES</h3>
+            <p>&bull; Warning</p>
+            <p>&bull; Point deduction</p>
+            <p>&bull; Disqualification</p>
+            <p>&bull; Ban from future tournaments</p>
+
+            <p>Serious cheating = long-term ban.</p><hr>
+
+            <h3>PROOF & REPORTING</h3>
+            <p>&bull; Players must record or save gameplay (POV) if required.</p>
+            <p>&bull; If suspected cheating, report with proper evidence.</p>
+            <p>&bull; Organisers may request gameplay proof anytime.</p><hr>
+        </div>
+
+        <!-- Tournament Rules > Full Map Squad Rules -->
+        <div class="section-content rule-detail"
+             id="rules-squad"
+             data-title="Full Map Squad Rules"
+             data-parent="rules">
+            <h3>GENERAL RULES</h3>
+            <p><strong>1.1 Authority</strong></p>
+            <P>• Tournament organiser decisions are final.</P>
+            <P>• Rules may be updated before or during tournament if necessary.</p><hr>
+
+            <p><strong>1.2 Competitive Integrity</strong></p>
+            <p>&bull; Teams must always play to win.</p>
+            <p>&bull; No intentional losing.</p>
+            <p>&bull; No collusion or teaming with opponents.</p>
+            <p>&bull; No prize-splitting agreements.</p><hr>
+
+            <p><strong>1.3 Fair Play</strong></p>
+            <p>&bull; No hacks, modded APK, scripts, macros.</p>
+            <p>&bull; No exploiting game bugs intentionally.</p>
+            <p>&bull; No external signals during match.</p>
+            <p>Violation = disqualification + possible ban.</p><hr>
+
+            <h3>MATCH FORMAT</h3>
+            <p><strong>2.1 Mode</strong></p>
+            <p>&bull; Battle Royale – Squad (Full Map)</p>
+            <p>&bull; Objective: Last squad alive (BOOYAH)</p><hr>
+
+            <p><strong>Lobby Structure</strong></p>
+            <p>&bull; 12 teams per match</p>
+            <p>&bull; 4 players per squad</p>
+            <p>&bull; Total 48 players</p><hr>
+
+            <p><strong>2.3 Maps</strong></p>
+            <p>&bull; Bermuda</p>
+            <p>&bull; Purgatory</p>
+            <p>&bull; Kalahari</p>
+            <p>&bull; Alpine</p>
+            <p>&bull; Nexterra</p>
+            <p>(Map rotation decided by organiser)</p><hr>
+
+            <p><strong>2.4 Match Format</strong></p>
+            <p>&bull; 4–6 games per match/round</p>
+            <p>&bull; Points accumulate across all games</p><hr>
+
+            <p><strong>2.5 Disconnections</strong></p>
+            <p>&bull; Match continues if player disconnects</p>
+            <p>&bull; Reconnect allowed if match still active</p>
+            <p>&bull; No remake unless server-wide issue</p><hr>
+
+            <h3>SCORING SYSTEM</h3>
+            <p><strong>3.1 Formula</strong></p>
+            <p>Total Points = Placement Points + Elimination Points</p><hr>
+
+            <p><strong>3.2 Elimination Points</strong></p>
+            <p>&bull; 1 point per kill</p><hr>
+
+            <p><strong>3.3 Placement Points</strong></p>
+
+            <table border="1" cellpadding="6" cellspacing="0">
+            <tr>
+                <th>Placement</th>
+                <th>Points</th>
+            </tr>
+            <tr><td>1st</td><td>12</td></tr>
+            <tr><td>2nd</td><td>9</td></tr>
+            <tr><td>3rd</td><td>8</td></tr>
+            <tr><td>4th</td><td>7</td></tr>
+            <tr><td>5th</td><td>6</td></tr>
+            <tr><td>6th</td><td>5</td></tr>
+            <tr><td>7th</td><td>4</td></tr>
+            <tr><td>8th</td><td>3</td></tr>
+            <tr><td>9th</td><td>2</td></tr>
+            <tr><td>10th</td><td>1</td></tr>
+            <tr><td>11th</td><td>0</td></tr>
+            <tr><td>12th</td><td>0</td></tr>
+            </table><hr>
+
+            <p><strong>3.4 Tiebreakers</strong></p>
+            <p>&bull; Most Booyahs</p>
+            <p>&bull; Most eliminations</p>
+            <p>&bull; Best recent match placement</p><hr>
+
+            <h3>TEAM STRUCTURE RULES</h3>
+            <p><strong>4.1 Team Size</strong></p>
+            <p>&bull; Minimum 4 players</p>
+            <p>&bull; Maximum 6 (including substitutes if allowed)</p><hr>
+
+            <p><strong>4.2 Substitutions</strong></p>
+            <p>&bull; No substitution during active match</p>
+            <p>&bull; Allowed only between matches</p><hr>
+
+            <p><strong>4.3 Team Captain</strong></p>
+            <p>&bull; Each team must appoint 1 captain</p>
+            <p>&bull; Responsible for communication</p><hr>
+
+            <p><strong>4.4 Account Rules</strong></p>
+            <p>&bull; One account per player</p>
+            <p>&bull; No smurfing</p>
+            <p>&bull; No multi-team participation</p>
+            <p>&bull; No account sharing</p>
+            <p>&bull; Minimum 40 level</p><hr>
+
+            <h3>CODE OF CONDUCT</h3>
+            <p><strong>5.1 Sportsmanship</strong></p>
+
+            <p><strong>5.1 Sportsmanship</strong></p>
+            <p>&bull; Respect opponents & officials</p>
+            <p>&bull; No toxic behavior</p>
+            <p>&bull; No trolling or intentional griefing</p><hr>
+
+            <p><strong>5.2 Language</strong></p>
+            <p>&bull; No abusive, racist, threatening language</p>
+            <p>&bull; No harassment or insults</p>
+            <p>&bull; Applies in-game, voice chat, Discord, and social media</p><hr>
+
+            <p><strong>5.3 Participation Commitment</strong></p>
+            <p>&bull; Teams must complete the tournament</p>
+            <p>&bull; Refusing to play scheduled matches = penalty</p>
+            <p>&bull; Leaving mid-event without approval = disqualification</p><hr>
+
+            <p><strong>5.4 Discrimination</strong></p>
+            <p>&bull; Zero tolerance for discrimination</p>
+            <p>&bull; No targeting based on race, religion, gender, nationality, etc.</p>
+
+            <p>Immediate disciplinary action applies.</p><hr>
+
+            <p><strong>5.5 Technical Issue Conduct</strong></p>
+            <p>&bull; Players are responsible for their own internet connection</p>
+            <p>&bull; No match remake for personal lag or high ping</p>
+            <p>&bull; Reconnect allowed if match still ongoing</p>
+            <p>&bull; No intentional disconnecting to avoid elimination</p>
+            <p>&bull; No false technical excuse to delay match</p>
+            <p>&bull; Only server-wide failure may qualify for remake (admin decision)</p>
+
+            <p>Abusing technical issues for advantage = treated as misconduct.</p><hr>
+
+            <h3>BUG & EXPLOIT RULES</h3>
+            <p>&bull; No gloo wall glitch abuse</p>
+            <p>&bull; No invisible floor exploit</p>
+            <p>&bull; No map pass-through exploit</p>
+            <p>&bull; No reload animation abuse</p>
+
+            <p>Intentional bug abuse = disqualification.</p><hr>
+
+            <h3>PENALTIES</h3>
+            <p>Depending on severity:</p>
+            <p>&bull; Warning</p>
+            <p>&bull; Point deduction</p>
+            <p>&bull; Prize deduction</p>
+            <p>&bull; Disqualification</p>
+            <p>&bull; Temporary ban</p>
+            <p>&bull; Permanent ban</p><hr>
+
+            <h3>PROOF & REPORTING</h3>
+            <p>&bull; Players must record or save gameplay (POV) if required.</p>
+            <p>&bull; If suspected cheating, report with proper evidence.</p>
+            <p>&bull; Organisers may request gameplay proof anytime.</p><hr>
+        </div>
+
+        <!-- Tournament Rules > Paid Custom Match Rules -->
+        <div class="section-content rule-detail"
+             id="rules-custom"
+             data-title="Paid Custom Match Rules"
+             data-parent="rules">
+            <p>Custom matches are hosted privately for paid participants.</p>
+            <hr>
+            <p>All standard fair play rules apply.</p>
+            <hr>
+            <p>Room ID and password will be provided before match start.</p>
+            <hr>
+            <p>Any form of cheating results in immediate ban and forfeit of fee.</p>
+        </div>
+
+        <!-- NEW: Tournament Rules > Clash Squad Rules -->
+        <div class="section-content rule-detail"
+             id="rules-clashsquad"
+             data-title="Clash Squad Rules"
+             data-parent="rules">
+            <p>Clash Squad format: Best of 3 rounds.</p>
+            <hr>
+            <p>Each team must have exactly 4 players.</p>
+            <hr>
+            <p>No use of glitches or map exploits.</p>
+            <hr>
+            <p>Any team found cheating will be disqualified immediately.</p>
+        </div>
+
+        <!-- Benefits > Paid Scrims -->
+        <div class="section-content"
+             id="benefits-scrims"
+             data-title="Paid Scrims"
+             data-parent="benefits">
+            <h3>1. Bulk Slot Lock (Season Pass)</h3>
+            <p><strong>Offer Structure:</strong></p>
+            <p>&bull; 2 tournaments booked together → 10% discount</p>
+            <p>&bull; 3 tournaments booked together → 20% discount</p>
+            <p>&bull; 4 tournaments booked together → 30% discount</p><hr>
+
+            <p><strong>Conditions:</strong></p>
+            <p>&bull; Same team only</p>
+            <p>&bull; Same tournament format</p>
+            <p>&bull; Same day / same slot</p>
+            <p>&bull; Full payment upfront</p><hr>
+
+            <p><strong>Rules:</strong></p>
+            <p>&bull; Slot fixed & guaranteed</p>
+            <p>&bull; No waiting list</p>
+            <p>&bull; Non-refundable</p>
+            <p>&bull; No reschedule</p>
+            <p>&bull; Continuity Reward not applicable</p><hr>
+
+            <h3>2. Continuity Reward</h3>
+            <p><strong>Offer Structure:</strong></p>
+            <p>&bull; 2nd continuous appearance → 10% discount</p>
+            <p>&bull; 3rd continuous appearance → 20% discount</p>
+            <p>&bull; 4th continuous appearance → 30% discount</p><hr>
+
+            <p><strong>Conditions:</strong></p>
+            <p>&bull; Same team</p>
+            <p>&bull; Same format</p>
+            <p>&bull; Continuous participation mandatory</p>
+            <p>&bull; Result does not matter</p><hr>
+
+            <p><strong>Rules:</strong></p>
+            <p>&bull; Skip = continuity reset</p>
+            <p>&bull; Discount applies only on next entry</p>
+            <p>&bull; Cannot be combined with any other offer</p><hr>
+
+            <h3>3. Losing Team Support (Comeback Advantage)</h3>
+            <p><strong>Offer Structure:</strong></p>
+            <p>&bull; 2 consecutive tournament losses → 10% discount on next entry</p><hr>
+
+            <p><strong>Conditions:</strong></p>
+            <p>&bull; Same team</p>
+            <p>&bull; Same format</p>
+            <p>&bull; Loss = early elimination</p><hr>
+
+            <p><strong>Rules:</strong></p>
+            <p>&bull; Discount valid only once</p>
+            <p>&bull; After usage → loss counter reset</p>
+            <p>&bull; Skip tournament → counter reset</p>
+            <p>&bull; Framed as redemption, not failure</p><hr>
+
+            <h3>4. Bring New Team Reward</h3>
+            <p><strong>Offer Structure:</strong></p>
+
+            <p>&bull; Bring 1 new team → 10% discount</p>
+            <p>&bull; Bring 2 new teams (max) → 20% discount</p><hr>
+
+            <p><strong>Conditions:</strong></p>
+            <p>&bull; New team must be genuine</p>
+            <p>&bull; New team must actually play at least 1 tournament</p><hr>
+
+            <p><strong>Rules:</strong></p>
+            <p>&bull; Reward applies to referring team’s next entry</p>
+            <p>&bull; Fake / duplicate teams → disqualification</p>
+            <p>&bull; Max cap = 2 teams</p><hr>
+
+            <h3>5. Captain Voucher</h3>
+            <p><strong>Description:</strong></p>
+            <p>Entry fee discount voucher issued only to the team captain.</p><hr>
+
+            <p><strong>Voucher Value:</strong></p>
+            <p>&bull; ₹50 – ₹100 (fixed amount)</p><hr>
+
+            <p><strong>Issuance Criteria:</strong></p>
+            <p>&bull; After defined number of tournaments</p>
+            <p>&bull; After inactivity return</p>
+            <p>&bull; Manual loyalty / retention decision</p>
+            <p>&bull; Captain’s punctuality (room join on time)</p>
+            <p>&bull; Behaviour & coordination with host/admin</p><hr>
+
+            <p><strong>Usage Rules:</strong></p>
+            <p>&bull; Team entry fee only</p>
+            <p>&bull; Any tournament</p>
+            <p>&bull; One-time use</p>
+            <p>&bull; Valid 7–14 days</p><hr>
+
+            <p><strong>Restrictions:</strong></p>
+            <p>&bull; Captain-only</p>
+            <p>&bull; Not transferable</p>
+            <p>&bull; No stacking with other offers</p><hr>
+
+            <h3>6. Loyalty Preference (Temporary / Informal)</h3>
+            <p><strong>Current Status:</strong></p>
+            <p>&bull; No formal tiers</p>
+            <p>&bull; No badges</p>
+            <p>&bull; No written record</p><hr>
+
+            <p><strong>Evaluation Factors:</strong></p>
+            <p>&bull; Regular participation</p>
+            <p>&bull; Punctual room joining</p>
+            <p>&bull; Behaviour with host/admin</p>
+            <p>&bull; Rule compliance</p><hr>
+
+            <p><strong>Possible Benefits (Admin Discretion):</strong></p>
+            <p>&bull; Timing flexibility</p>
+            <p>&bull; Slot preference</p>
+            <p>&bull; Priority communication</p>
+            <p>&bull; Decision on how many offers can be used at once</p><hr>
+
+            <p><strong>Rules:</strong></p>
+            <p>&bull; Not guaranteed</p>
+            <p>&bull; Not publicly announced</p>
+            <p>&bull; Admin decision final</p><hr>
+
+            <h3>7. System Control Rules (MOST IMPORTANT)</h3>
+            <p>&bull; Maximum 2 offers active at any time</p>
+            <p>&bull; Offers rotate weekly</p>
+            <p>&bull; Loss-based offers never run together</p>
+            <p>&bull; Captain Voucher & Loyalty Preference are discretionary</p>
+            <p>&bull; All offers are non-stackable unless explicitly allowed</p>
+            <p>&bull; Admin/Host decision is final</p><hr>
+
+            <h3>General Tournament Discipline Rules</h3>
+            <p>&bull; Team must join custom room on time</p>
+            <p>&bull; Late join may affect future benefits</p>
+            <p>&bull; Misbehaviour with host/admin not tolerated</p>
+            <p>&bull; Rule violation may lead to loss of privileges</p><hr>
+
+            <h3>Final Note</h3>
+            <p>All offers and benefits are designed to:</p><br>
+            <p>&bull; These percentages are approximate and not exact.</p>
+            <p>&bull; Encourage discipline</p>
+            <p>&bull; Reduce drop-offs</p>
+            <p>&bull; Maintain fair play</p>
+            <p>&bull; Keep control with admins</p><br>
+
+            <p><strong>These percentages are approximate and not exact.</strong></p>
+            <p>No offer is an entitlement.</p>
+            <p>Participation implies acceptance of all rules.</p><hr>
+        </div>
+
+        <!-- Benefits > Paid Matches -->
+        <div class="section-content"
+             id="benefits-matches"
+             data-title="Paid Matches"
+             data-parent="benefits">
+            <h3>1. Bulk Slot Lock (Season Pass)</h3>
+            <p><strong>Offer Structure:</strong></p>
+            <p>&bull; 2 tournaments booked together → 10% discount</p>
+            <p>&bull; 3 tournaments booked together → 20% discount</p>
+            <p>&bull; 4 tournaments booked together → 30% discount</p><hr>
+
+            <p><strong>Conditions:</strong></p>
+            <p>&bull; Same team only</p>
+            <p>&bull; Same tournament format</p>
+            <p>&bull; Same day / same slot</p>
+            <p>&bull; Full payment upfront</p><hr>
+
+            <p><strong>Rules:</strong></p>
+            <p>&bull; Slot fixed & guaranteed</p>
+            <p>&bull; No waiting list</p>
+            <p>&bull; Non-refundable</p>
+            <p>&bull; No reschedule</p>
+            <p>&bull; Continuity Reward not applicable</p><hr>
+
+            <h3>2. Continuity Reward</h3>
+            <p><strong>Offer Structure:</strong></p>
+            <p>&bull; 2nd continuous appearance → 10% discount</p>
+            <p>&bull; 3rd continuous appearance → 20% discount</p>
+            <p>&bull; 4th continuous appearance → 30% discount</p><hr>
+
+            <p><strong>Conditions:</strong></p>
+            <p>&bull; Same team</p>
+            <p>&bull; Same format</p>
+            <p>&bull; Continuous participation mandatory</p>
+            <p>&bull; Result does not matter</p><hr>
+
+            <p><strong>Rules:</strong></p>
+            <p>&bull; Skip = continuity reset</p>
+            <p>&bull; Discount applies only on next entry</p>
+            <p>&bull; Cannot be combined with any other offer</p><hr>
+
+            <h3>3. Losing Team Support (Comeback Advantage)</h3>
+            <p><strong>Offer Structure:</strong></p>
+            <p>&bull; 2 consecutive tournament losses → 10% discount on next entry</p><hr>
+
+            <p><strong>Conditions:</strong></p>
+            <p>&bull; Same team</p>
+            <p>&bull; Same format</p>
+            <p>&bull; Loss = early elimination</p><hr>
+
+            <p><strong>Rules:</strong></p>
+            <p>&bull; Discount valid only once</p>
+            <p>&bull; After usage → loss counter reset</p>
+            <p>&bull; Skip tournament → counter reset</p>
+            <p>&bull; Framed as redemption, not failure</p><hr>
+
+            <h3>4. Bring New Team Reward</h3>
+            <p><strong>Offer Structure:</strong></p>
+
+            <p>&bull; Bring 1 new team → 10% discount</p>
+            <p>&bull; Bring 2 new teams (max) → 20% discount</p><hr>
+
+            <p><strong>Conditions:</strong></p>
+            <p>&bull; New team must be genuine</p>
+            <p>&bull; New team must actually play at least 1 tournament</p><hr>
+
+            <p><strong>Rules:</strong></p>
+            <p>&bull; Reward applies to referring team’s next entry</p>
+            <p>&bull; Fake / duplicate teams → disqualification</p>
+            <p>&bull; Max cap = 2 teams</p><hr>
+
+            <h3>5. Captain Voucher</h3>
+            <p><strong>Description:</strong></p>
+            <p>Entry fee discount voucher issued only to the team captain.</p><hr>
+
+            <p><strong>Voucher Value:</strong></p>
+            <p>&bull; ₹50 – ₹100 (fixed amount)</p><hr>
+
+            <p><strong>Issuance Criteria:</strong></p>
+            <p>&bull; After defined number of tournaments</p>
+            <p>&bull; After inactivity return</p>
+            <p>&bull; Manual loyalty / retention decision</p>
+            <p>&bull; Captain’s punctuality (room join on time)</p>
+            <p>&bull; Behaviour & coordination with host/admin</p><hr>
+
+            <p><strong>Usage Rules:</strong></p>
+            <p>&bull; Team entry fee only</p>
+            <p>&bull; Any tournament</p>
+            <p>&bull; One-time use</p>
+            <p>&bull; Valid 7–14 days</p><hr>
+
+            <p><strong>Restrictions:</strong></p>
+            <p>&bull; Captain-only</p>
+            <p>&bull; Not transferable</p>
+            <p>&bull; No stacking with other offers</p><hr>
+
+            <h3>6. Loyalty Preference (Temporary / Informal)</h3>
+            <p><strong>Current Status:</strong></p>
+            <p>&bull; No formal tiers</p>
+            <p>&bull; No badges</p>
+            <p>&bull; No written record</p><hr>
+
+            <p><strong>Evaluation Factors:</strong></p>
+            <p>&bull; Regular participation</p>
+            <p>&bull; Punctual room joining</p>
+            <p>&bull; Behaviour with host/admin</p>
+            <p>&bull; Rule compliance</p><hr>
+
+            <p><strong>Possible Benefits (Admin Discretion):</strong></p>
+            <p>&bull; Timing flexibility</p>
+            <p>&bull; Slot preference</p>
+            <p>&bull; Priority communication</p>
+            <p>&bull; Decision on how many offers can be used at once</p><hr>
+
+            <p><strong>Rules:</strong></p>
+            <p>&bull; Not guaranteed</p>
+            <p>&bull; Not publicly announced</p>
+            <p>&bull; Admin decision final</p><hr>
+
+            <h3>7. System Control Rules (MOST IMPORTANT)</h3>
+            <p>&bull; Maximum 2 offers active at any time</p>
+            <p>&bull; Offers rotate weekly</p>
+            <p>&bull; Loss-based offers never run together</p>
+            <p>&bull; Captain Voucher & Loyalty Preference are discretionary</p>
+            <p>&bull; All offers are non-stackable unless explicitly allowed</p>
+            <p>&bull; Admin/Host decision is final</p><hr>
+
+            <h3>General Tournament Discipline Rules</h3>
+            <p>&bull; Team must join custom room on time</p>
+            <p>&bull; Late join may affect future benefits</p>
+            <p>&bull; Misbehaviour with host/admin not tolerated</p>
+            <p>&bull; Rule violation may lead to loss of privileges</p><hr>
+
+            <h3>Final Note</h3>
+            <p>All offers and benefits are designed to:</p><br>
+            <p>&bull; These percentages are approximate and not exact.</p>
+            <p>&bull; Encourage discipline</p>
+            <p>&bull; Reduce drop-offs</p>
+            <p>&bull; Maintain fair play</p>
+            <p>&bull; Keep control with admins</p><br>
+
+            <p><strong>These percentages are approximate and not exact.</strong></p>
+            <p>No offer is an entitlement.</p>
+            <p>Participation implies acceptance of all rules.</p><hr>
+        </div>
+
+        <!-- Benefits > Paid Tournaments -->
+        <div class="section-content"
+             id="benefits-tournaments"
+             data-title="Paid Tournaments"
+             data-parent="benefits">
+           <h3>1. Bulk Slot Lock (Season Pass)</h3>
+            <p><strong>Offer Structure:</strong></p>
+            <p>&bull; 2 tournaments booked together → 10% discount</p>
+            <p>&bull; 3 tournaments booked together → 20% discount</p>
+            <p>&bull; 4 tournaments booked together → 30% discount</p><hr>
+
+            <p><strong>Conditions:</strong></p>
+            <p>&bull; Same team only</p>
+            <p>&bull; Same tournament format</p>
+            <p>&bull; Same day / same slot</p>
+            <p>&bull; Full payment upfront</p><hr>
+
+            <p><strong>Rules:</strong></p>
+            <p>&bull; Slot fixed & guaranteed</p>
+            <p>&bull; No waiting list</p>
+            <p>&bull; Non-refundable</p>
+            <p>&bull; No reschedule</p>
+            <p>&bull; Continuity Reward not applicable</p><hr>
+
+            <h3>2. Continuity Reward</h3>
+            <p><strong>Offer Structure:</strong></p>
+            <p>&bull; 2nd continuous appearance → 10% discount</p>
+            <p>&bull; 3rd continuous appearance → 20% discount</p>
+            <p>&bull; 4th continuous appearance → 30% discount</p><hr>
+
+            <p><strong>Conditions:</strong></p>
+            <p>&bull; Same team</p>
+            <p>&bull; Same format</p>
+            <p>&bull; Continuous participation mandatory</p>
+            <p>&bull; Result does not matter</p><hr>
+
+            <p><strong>Rules:</strong></p>
+            <p>&bull; Skip = continuity reset</p>
+            <p>&bull; Discount applies only on next entry</p>
+            <p>&bull; Cannot be combined with any other offer</p><hr>
+
+            <h3>3. Losing Team Support (Comeback Advantage)</h3>
+            <p><strong>Offer Structure:</strong></p>
+            <p>&bull; 2 consecutive tournament losses → 10% discount on next entry</p><hr>
+
+            <p><strong>Conditions:</strong></p>
+            <p>&bull; Same team</p>
+            <p>&bull; Same format</p>
+            <p>&bull; Loss = early elimination</p><hr>
+
+            <p><strong>Rules:</strong></p>
+            <p>&bull; Discount valid only once</p>
+            <p>&bull; After usage → loss counter reset</p>
+            <p>&bull; Skip tournament → counter reset</p>
+            <p>&bull; Framed as redemption, not failure</p><hr>
+
+            <h3>4. Bring New Team Reward</h3>
+            <p><strong>Offer Structure:</strong></p>
+
+            <p>&bull; Bring 1 new team → 10% discount</p>
+            <p>&bull; Bring 2 new teams (max) → 20% discount</p><hr>
+
+            <p><strong>Conditions:</strong></p>
+            <p>&bull; New team must be genuine</p>
+            <p>&bull; New team must actually play at least 1 tournament</p><hr>
+
+            <p><strong>Rules:</strong></p>
+            <p>&bull; Reward applies to referring team’s next entry</p>
+            <p>&bull; Fake / duplicate teams → disqualification</p>
+            <p>&bull; Max cap = 2 teams</p><hr>
+
+            <h3>5. Captain Voucher</h3>
+            <p><strong>Description:</strong></p>
+            <p>Entry fee discount voucher issued only to the team captain.</p><hr>
+
+            <p><strong>Voucher Value:</strong></p>
+            <p>&bull; ₹50 – ₹100 (fixed amount)</p><hr>
+
+            <p><strong>Issuance Criteria:</strong></p>
+            <p>&bull; After defined number of tournaments</p>
+            <p>&bull; After inactivity return</p>
+            <p>&bull; Manual loyalty / retention decision</p>
+            <p>&bull; Captain’s punctuality (room join on time)</p>
+            <p>&bull; Behaviour & coordination with host/admin</p><hr>
+
+            <p><strong>Usage Rules:</strong></p>
+            <p>&bull; Team entry fee only</p>
+            <p>&bull; Any tournament</p>
+            <p>&bull; One-time use</p>
+            <p>&bull; Valid 7–14 days</p><hr>
+
+            <p><strong>Restrictions:</strong></p>
+            <p>&bull; Captain-only</p>
+            <p>&bull; Not transferable</p>
+            <p>&bull; No stacking with other offers</p><hr>
+
+            <h3>6. Loyalty Preference (Temporary / Informal)</h3>
+            <p><strong>Current Status:</strong></p>
+            <p>&bull; No formal tiers</p>
+            <p>&bull; No badges</p>
+            <p>&bull; No written record</p><hr>
+
+            <p><strong>Evaluation Factors:</strong></p>
+            <p>&bull; Regular participation</p>
+            <p>&bull; Punctual room joining</p>
+            <p>&bull; Behaviour with host/admin</p>
+            <p>&bull; Rule compliance</p><hr>
+
+            <p><strong>Possible Benefits (Admin Discretion):</strong></p>
+            <p>&bull; Timing flexibility</p>
+            <p>&bull; Slot preference</p>
+            <p>&bull; Priority communication</p>
+            <p>&bull; Decision on how many offers can be used at once</p><hr>
+
+            <p><strong>Rules:</strong></p>
+            <p>&bull; Not guaranteed</p>
+            <p>&bull; Not publicly announced</p>
+            <p>&bull; Admin decision final</p><hr>
+
+            <h3>7. System Control Rules (MOST IMPORTANT)</h3>
+            <p>&bull; Maximum 2 offers active at any time</p>
+            <p>&bull; Offers rotate weekly</p>
+            <p>&bull; Loss-based offers never run together</p>
+            <p>&bull; Captain Voucher & Loyalty Preference are discretionary</p>
+            <p>&bull; All offers are non-stackable unless explicitly allowed</p>
+            <p>&bull; Admin/Host decision is final</p><hr>
+
+            <h3>General Tournament Discipline Rules</h3>
+            <p>&bull; Team must join custom room on time</p>
+            <p>&bull; Late join may affect future benefits</p>
+            <p>&bull; Misbehaviour with host/admin not tolerated</p>
+            <p>&bull; Rule violation may lead to loss of privileges</p><hr>
+
+            <h3>Final Note</h3>
+            <p>All offers and benefits are designed to:</p><br>
+            <p>&bull; These percentages are approximate and not exact.</p>
+            <p>&bull; Encourage discipline</p>
+            <p>&bull; Reduce drop-offs</p>
+            <p>&bull; Maintain fair play</p>
+            <p>&bull; Keep control with admins</p><br>
+
+            <p><strong>These percentages are approximate and not exact.</strong></p>
+            <p>No offer is an entitlement.</p>
+            <p>Participation implies acceptance of all rules.</p><hr>
+        </div>
+
+        <!-- Suggestions > Give Feedback (updated with social links) -->
+        <div class="section-content"
+             id="suggestions-feedback"
+             data-title="Give Feedback"
+             data-parent="suggestions">
+            <p>We'd love to hear from you! Reach out on our social channels:</p>
+            <hr>
+            <p><a href="https://whatsapp.com/channel/0029VagAQHF4inot7ReHCQ1h" target="_blank">📱 <strong>WhatsApp Channel:</strong> Join here</a></p>
+            <hr>
+            <p><a href="https://www.instagram.com/hog_gamers" target="_blank">📸 <strong>Instagram:</strong> @hog_gamers</a></p>
+            <hr>
+            <p><a href="https://youtube.com/@hoggamerslive" target="_blank">▶️ <strong>YouTube:</strong> HOG Gamers Live</a></p>
+            <hr>
+            <p>Send us a direct message with your feedback - we read every message!</p>
+        </div>
+
+        <!-- Suggestions > Suggest Improvements (updated with social links) -->
+        <div class="section-content"
+             id="suggestions-improvements"
+             data-title="Suggest Improvements"
+             data-parent="suggestions">
+            <p>Have ideas to make HOG Gamers better? Let us know:</p>
+            <hr>
+            <p><a href="https://whatsapp.com/channel/0029VagAQHF4inot7ReHCQ1h" target="_blank">📱 <strong>WhatsApp Channel:</strong> Join here</a></p>
+            <hr>
+            <p><a href="https://www.instagram.com/hog_gamers" target="_blank">📸 <strong>Instagram:</strong> @hog_gamers</a></p>
+            <hr>
+            <p><a href="https://youtube.com/@hoggamerslive" target="_blank">▶️ <strong>YouTube:</strong> HOG Gamers Live</a></p>
+            <hr>
+            <p>Drop your suggestions in DM or comment - we appreciate your input!</p>
+        </div>
+
+        <!-- NEW: Payment Proofs > Collaborative Tournament Payments -->
+        <div class="section-content"
+             id="payment-collab"
+             data-title="Collaborative Tournament Payments"
+             data-parent="payment-proofs">
+            <p style="text-align: center; font-size: 1.2rem;">🔜 Coming Soon</p>
+            <hr>
+            <p>We are compiling payment proofs from our collaborative tournaments. Check back later!</p>
+        </div>
+
+        <!-- NEW: Payment Proofs > Official HOG Tournament Payments -->
+        <div class="section-content"
+             id="payment-official"
+             data-title="Official HOG Tournament Payments"
+             data-parent="payment-proofs">
+            <p style="text-align: center; font-size: 1.2rem;">🔜 Coming Soon</p>
+            <hr>
+            <p>Screenshots and transaction details from official HOG tournaments will appear here.</p>
+        </div>
+
+        <!-- NEW: Payment Proofs > HOG Sponsored Event Payments -->
+        <div class="section-content"
+             id="payment-sponsored"
+             data-title="HOG Sponsored Event Payments"
+             data-parent="payment-proofs">
+            <p style="text-align: center; font-size: 1.2rem;">🔜 Coming Soon</p>
+            <hr>
+            <p>Proofs from sponsored events and special prize distributions are on the way.</p>
+        </div>
+
+        <!-- NEW: Social > FF Status WhatsApp Channel -->
+        <div class="section-content"
+             id="social-ffstatus"
+             data-title="FF Status WhatsApp Channel"
+             data-parent="social">
+            <p style="text-align: center; font-size: 1.2rem;">🔜 Coming Soon</p>
+            <hr>
+            <p>Stay tuned for exclusive Free Fire status updates and news via WhatsApp.</p>
+        </div>
+
+        <!-- NEW: Social > FF ID Buy & Sell Channel -->
+        <div class="section-content"
+             id="social-buysell"
+             data-title="FF ID Buy & Sell Channel"
+             data-parent="social">
+            <p style="text-align: center; font-size: 1.2rem;">🔜 Coming Soon</p>
+            <hr>
+            <p>A safe platform to buy and sell Free Fire IDs. Details will be announced soon.</p>
+        </div>
+
+    </div> <!-- close page-content -->
+</div> <!-- close page-view -->
+
+<footer class="footer" id="footer">
+    © 2026 HOG Gamers. All Rights Reserved.
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
