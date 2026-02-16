@@ -1,184 +1,455 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>HOG Gamers</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-<!-- TOP BAR -->
-<div class="top-bar">
-    <h1>HOG GAMERS</h1>
-    <p class="tagline">Official Tournament Information Hub</p>
-</div>
+:root {
+    --bg-dark: #0a0c10;
+    --card-dark: #14161f;
+    --primary: #00bfff;
+    --primary-glow: rgba(0, 191, 255, 0.4);
+    --text-light: #ffffff;
+    --text-muted: #9aa0b0;
+    --gradient-1: linear-gradient(135deg, #00bfff, #0066ff);
+    --gradient-2: linear-gradient(145deg, #1e2230, #13151f);
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
+    --shadow-glow: 0 0 20px var(--primary-glow);
+    --border-glow: 0 0 0 1px rgba(0, 191, 255, 0.2);
+    --border-light: 1px solid rgba(255, 255, 255, 0.06);
+}
 
-<!-- HOME -->
-<div class="container" id="homeView">
-    <div class="menu">
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
 
-        <a href="#about" class="menu-item">
-            About Us
-            <div class="popup">Learn about our organisation and tournament structure.</div>
-        </a>
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-light);
+    line-height: 1.5;
+    background: var(--bg-dark);
+    /* Subtle animated gradient background covering entire body */
+    background-image: radial-gradient(circle at 30% 40%, rgba(0, 191, 255, 0.2) 0%, transparent 40%),
+                      radial-gradient(circle at 70% 60%, rgba(0, 191, 255, 0.15) 0%, transparent 50%),
+                      radial-gradient(circle at 40% 80%, rgba(0, 100, 255, 0.10) 0%, transparent 60%);
+    background-size: 200% 200%;
+    animation: subtleBackgroundShift 25s ease-in-out infinite;
+    position: relative;
+}
 
-        <a href="#rules" class="menu-item">
-            Tournament Rules
-            <div class="popup">View detailed rules for all tournament modes.</div>
-        </a>
+@keyframes subtleBackgroundShift {
+    0% { background-position: 0% 0%; }
+    33% { background-position: 100% 50%; }
+    66% { background-position: 50% 100%; }
+    100% { background-position: 0% 0%; }
+}
 
-        <a href="#benefits" class="menu-item">
-            Benefits
-            <div class="popup">Explore paid scrims, matches and tournaments.</div>
-        </a>
+/* TOP BAR with gradient – compact */
+.top-bar {
+    width: 100%;
+    background: var(--gradient-2);
+    padding: 15px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+}
 
-        <a href="#suggestions" class="menu-item">
-            Suggestions
-            <div class="popup">Share feedback to improve our tournaments.</div>
-        </a>
+.top-bar::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(0,191,255,0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+    z-index: 0;
+}
 
-        <a href="#social" class="menu-item">
-            Social Media Links
-            <div class="popup">Connect with us across platforms.</div>
-        </a>
+.top-bar h1 {
+    font-size: clamp(28px, 7vw, 52px);
+    letter-spacing: 4px;
+    font-weight: 700;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 10px rgba(0,191,255,0.3);
+    line-height: 1.2;
+    margin: 0;
+}
 
-    </div>
-</div>
+.breadcrumb-top {
+    font-size: clamp(12px, 3vw, 15px);
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    z-index: 1;
+    margin-top: 5px;
+}
 
-<!-- PAGE VIEW -->
-<div class="page-view" id="pageView">
+/* HOME CONTAINER */
+.container {
+    width: 100%;
+    max-width: 560px;
+    margin: 50px auto;
+    padding: 0 25px;
+    flex: 1;
+}
 
-    <div class="page-header">
-        <button id="backBtn" class="back-btn" onclick="history.back()">← Back</button>
-        <button id="homeBtn" class="back-btn" onclick="location.hash='#home'">Home</button>
-        <h2 id="pageTitle"></h2>
-    </div>
+/* MENU ITEMS - Glassmorphism style */
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-    <div class="page-content">
+.menu-item {
+    background: rgba(20, 22, 31, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 22px 20px;
+    border-radius: 18px;
+    text-decoration: none;
+    color: var(--text-light);
+    transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+    border: var(--border-light);
+    font-size: clamp(16px, 2.5vw, 20px);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    /* overflow: hidden;  <-- REMOVED to allow popup to be visible */
+}
 
-        <!-- ================= LEVEL 2 ================= -->
+.menu-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+    pointer-events: none;
+}
 
-        <!-- ABOUT -->
-        <div class="section-content" id="about">
-            <a href="#about-organisation"><div class="card-link">About Organisation</div></a>
-            <a href="#about-tournaments"><div class="card-link">About Tournaments</div></a>
-        </div>
+.menu-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: var(--primary);
+    box-shadow: var(--shadow-md), var(--border-glow);
+}
 
-        <!-- RULES -->
-        <div class="section-content" id="rules">
-            <a href="#rules-solo"><div class="card-link">Full Map Solo Tournament Rules</div></a>
-            <a href="#rules-duo"><div class="card-link">Full Map Duo Tournament Rules</div></a>
-            <a href="#rules-custom"><div class="card-link">Paid Custom Matches Rules</div></a>
-        </div>
+.menu-item:hover::after {
+    opacity: 0.1;
+}
 
-        <!-- BENEFITS -->
-        <div class="section-content" id="benefits">
-            <a href="#benefits-scrims"><div class="card-link">Paid Scrims</div></a>
-            <a href="#benefits-matches"><div class="card-link">Paid Matches</div></a>
-            <a href="#benefits-tournaments"><div class="card-link">Paid Tournaments</div></a>
-        </div>
+.menu-item span {
+    position: relative;
+    z-index: 1;
+}
 
-        <!-- SUGGESTIONS -->
-        <div class="section-content" id="suggestions">
-            <a href="#suggestions-feedback"><div class="card-link">Give Feedback</div></a>
-            <a href="#suggestions-improvements"><div class="card-link">Suggest Improvements</div></a>
-        </div>
+/* INFO ICON – perfectly centered */
+.info-icon {
+    cursor: pointer;
+    font-size: 1.6rem;
+    margin-left: 12px;
+    user-select: none;
+    transition: all 0.2s ease;
+    background: rgba(255,255,255,0.05);
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 2;
+    line-height: 1; /* ensures vertical alignment */
+}
 
-        <!-- SOCIAL -->
-        <div class="section-content" id="social">
-            <a href="https://www.instagram.com/hog_gamers?igsh=enNjdHRweXZzZGhz" target="_blank">
-                <div class="card-link">Instagram</div>
-            </a>
+.info-icon > * {
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+}
 
-            <a href="https://youtube.com/@hoggamerslive?si=69ajGMolXyHYwUDw" target="_blank">
-                <div class="card-link">YouTube</div>
-            </a>
+.info-icon:hover {
+    transform: scale(1.15);
+    background: rgba(0,191,255,0.15);
+    border-color: var(--primary);
+    box-shadow: 0 0 15px var(--primary-glow);
+}
 
-            <a href="https://whatsapp.com/channel/0029VagAQHF4inot7ReHCQ1h" target="_blank">
-                <div class="card-link">WhatsApp</div>
-            </a>
-        </div>
+.info-icon.active {
+    color: var(--primary);
+    background: rgba(0,191,255,0.2);
+    border-color: var(--primary);
+    box-shadow: 0 0 20px var(--primary-glow);
+    transform: scale(1.2);
+}
 
+/* POPUP */
+.popup {
+    position: absolute;
+    bottom: 130%;
+    right: 0;
+    background: #1e2230;
+    padding: 14px 18px;
+    border-radius: 14px;
+    font-size: 13px;
+    width: 240px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, bottom 0.25s ease, transform 0.2s;
+    border: var(--border-light);
+    box-shadow: var(--shadow-md), 0 0 0 1px rgba(0,191,255,0.2);
+    backdrop-filter: blur(5px);
+    color: #e0e4f0;
+    line-height: 1.5;
+    z-index: 102;
+    white-space: normal;
+    word-wrap: break-word;
+    transform: translateY(5px);
+}
 
-        <!-- ================= LEVEL 3 ================= -->
+.popup.show {
+    opacity: 1;
+    pointer-events: auto;
+    bottom: 120%;
+    transform: translateY(0);
+}
 
-        <!-- ABOUT DETAILS -->
-        <div class="section-content rule-detail" id="about-organisation">
-            <p>HOG Gamers is a structured esports organisation.</p>
-            <hr>
-            <p>We focus on competitive integrity and fairness.</p>
-        </div>
+/* PAGE VIEW */
+.page-view {
+    display: none;
+    max-width: 750px;
+    margin: 50px auto;
+    padding: 0 25px;
+    animation: fadeInUp 0.5s ease;
+    flex: 1;
+    width: 100%;
+}
 
-        <div class="section-content rule-detail" id="about-tournaments">
-            <p>We conduct full map tournaments regularly.</p>
-            <hr>
-            <p>Different modes are available for all player types.</p>
-        </div>
+.page-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
 
-        <!-- RULE DETAILS -->
-        <div class="section-content rule-detail" id="rules-solo">
-            <p>No teaming allowed.</p>
-            <hr>
-            <p>No hacks or unfair gameplay.</p>
-            <hr>
-            <p>Follow host instructions strictly.</p>
-        </div>
+.page-header h2 {
+    font-size: clamp(22px, 5vw, 32px);
+    font-weight: 600;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-left: auto;
+}
 
-        <div class="section-content rule-detail" id="rules-duo">
-            <p>Only registered duo allowed.</p>
-            <hr>
-            <p>Both players must join on time.</p>
-            <hr>
-            <p>Violation leads to disqualification.</p>
-        </div>
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
 
-        <div class="section-content rule-detail" id="rules-custom">
-            <p>Entry confirmation required.</p>
-            <hr>
-            <p>No refund after room code release.</p>
-            <hr>
-            <p>Fair play mandatory.</p>
-        </div>
+.back-btn {
+    background: rgba(20, 22, 31, 0.8);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(0,191,255,0.3);
+    color: var(--primary);
+    padding: 8px 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    font-size: 14px;
+    box-shadow: var(--shadow-sm);
+}
 
-        <!-- BENEFITS DETAILS -->
-        <div class="section-content rule-detail" id="benefits-scrims">
-            <p>Daily competitive scrims for teams.</p>
-            <hr>
-            <p>Performance-based rankings.</p>
-        </div>
+.back-btn:hover {
+    background: var(--primary);
+    color: #000;
+    border-color: var(--primary);
+    box-shadow: 0 0 15px var(--primary-glow);
+    transform: translateY(-2px);
+}
 
-        <div class="section-content rule-detail" id="benefits-matches">
-            <p>Organised custom paid matches.</p>
-            <hr>
-            <p>Verified room distribution.</p>
-        </div>
+/* CARD LINKS (subcategory buttons) */
+.card-link {
+    background: var(--card-dark);
+    padding: 18px 22px;
+    border-radius: 16px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    border: var(--border-light);
+    transition: all 0.25s ease;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
 
-        <div class="section-content rule-detail" id="benefits-tournaments">
-            <p>Regular prize pool tournaments.</p>
-            <hr>
-            <p>Transparent result verification.</p>
-        </div>
+.card-link::after {
+    content: '→';
+    font-size: 18px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.25s ease;
+    color: var(--primary);
+}
 
-        <!-- SUGGESTION DETAILS -->
-        <div class="section-content rule-detail" id="suggestions-feedback">
-            <p>Players can send structured feedback.</p>
-            <hr>
-            <p>Feedback helps improve tournament quality.</p>
-        </div>
+.card-link:hover {
+    border-color: var(--primary);
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: var(--shadow-md), 0 0 0 1px rgba(0,191,255,0.2);
+    background: #1a1d2a;
+}
 
-        <div class="section-content rule-detail" id="suggestions-improvements">
-            <p>Suggest new formats or rule changes.</p>
-            <hr>
-            <p>Community driven improvements.</p>
-        </div>
-    </div>
-</div>
+.card-link:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
 
-<footer class="footer" id="footer">
-    © 2026 HOG Gamers. All Rights Reserved.
-</footer>
+.page-content a {
+    text-decoration: none;
+    color: var(--text-light);
+}
 
-<script src="script.js"></script>
-</body>
-</html>
+/* RULE DETAILS */
+.rule-detail {
+    padding: 15px 0;
+}
 
+.rule-detail p {
+    margin: 20px 0;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #d0d4e0;
+}
+
+.rule-detail hr {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin: 20px 0;
+}
+
+/* ========== CRITICAL: SECTION HIDING/SHOWING ========== */
+.section-content {
+    display: none;
+}
+
+.section-content.active-section {
+    display: block;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 25px 20px;
+    font-size: 14px;
+    color: var(--text-muted);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    margin-top: 60px;
+    background: rgba(10, 12, 16, 0.8);
+    backdrop-filter: blur(5px);
+    width: 100%;
+}
+
+/* ANIMATIONS */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+    .container,
+    .page-view {
+        padding: 0 20px;
+    }
+    
+    .menu-item {
+        padding: 18px 16px;
+    }
+    
+    .info-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 1.4rem;
+    }
+    
+    .popup {
+        width: 200px;
+        font-size: 12px;
+        padding: 12px;
+    }
+    
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .page-header h2 {
+        margin-left: 0;
+    }
+    
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ccc;  /* or any color/thickness you prefer */
+    height: 0;
+    margin: 1em 0;
+    clear: both;
+}
+
+/* .image {
+    position: absolute;
+    z-index: 104;
+    top: 10px;
+    left: 10px;
+} */
+img {
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    left: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+}
