@@ -201,7 +201,7 @@ body {
     max-width: 750px;
     margin: 50px auto;
     padding: 0 25px;
-    animation: fadeInUp 0.5s ease;
+    animation: fadeInUp 0.8s ease;
     flex: 1;
     width: 100%;
 }
@@ -307,13 +307,17 @@ body {
 
 /* ANIMATIONS */
 @keyframes fadeInUp {
-    from {
+    0% {
         opacity: 0;
         transform: translateY(20px);
     }
-    to {
+    50% {
+        opacity: 0.7;
+        transform: translateY(-10px);
+    }
+    100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0px);
     }
 }
 
@@ -399,4 +403,19 @@ img {
 .info-icon:active {
     box-shadow: inset 0 0 0 100px rgba(0, 191, 255, 0.2);
     transition: box-shadow 0.1s;
+}
+
+/* ===== ADDED FADE TRANSITION CLASSES ===== */
+#homeView,
+#pageView,
+.section-content.active-section {
+    transition: opacity 0.3s ease;
+}
+
+.fade-out {
+    opacity: 0;
+}
+
+.fade-in {
+    opacity: 1;
 }
