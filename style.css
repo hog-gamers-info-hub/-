@@ -38,6 +38,11 @@ body {
     background-size: 200% 400%;
     animation: subtleVerticalShift 15s ease-in-out infinite alternate;
     position: relative;
+    -webkit-user-select: none; /* Chrome, Safari, Opera */
+    -khtml-user-select: none; /* Konqueror */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Standard syntax */
 }
 
 @keyframes subtleVerticalShift {
@@ -419,3 +424,4 @@ img {
 .fade-in {
     opacity: 1;
 }
+
